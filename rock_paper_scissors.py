@@ -11,11 +11,15 @@ while player_wins < winning_score and computer_wins < winning_score:
 	if player == "quit" or player =="q":
 		break
 
-	rand_num = random.randint(0,2)
+	rand_num = random.randint(0,4)
 
 	if rand_num == 0:
 		computer = "rock"
 	elif rand_num == 1:
+		computer = "lizard"
+	elif rand_num == 2:
+		computer = "spock"
+	elif rand_num == 3:
 		computer = "paper"
 	else:
 		computer = "scissors"
