@@ -492,14 +492,24 @@ countries = [
 
 
 results = []
+subregion_population = {}
 user_region = input("Zadej světadíl: ")
 
 for country in countries:
     if country['region'] == user_region:
         results.append(country['name'])
+
+        if country['subregion'] not in subregion_population:
+            subregion_population[country['subregion']] = 0
+
+        subregion_population[country['subregion']] += country['population']
+
+
 if results == []:
     print("Neznámý region") 
 else:       
     print(results)
+    print(subregion_population)
+
 
 
