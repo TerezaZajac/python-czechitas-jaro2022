@@ -17,7 +17,8 @@ def phone_num_length(number):
     return len(number) == 9 or len(number) == 13
 
 def message_price(message):
-    return 3 * (int(len(message) / 180) + 1)
+    if len(message) >= 1:
+        return 3 * (int((len(message) -1) / 180) + 1)
 
 phone_number = input('Zadej sve telefoni cislo: ')
 
