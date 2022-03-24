@@ -38,7 +38,9 @@ class Receipt:
         for k, v in self.ing.items():
             r += f'{v[1]}[{v[0].unit.label}] {v[0]}, '
         
-        return f'{self.label} - potrebujeme {r}'
+        tt = ', '.join([tag.label for tag in self.tags])
+
+        return f'{self.label} patri do: {tt} - potrebujeme {r}'
 
 class Ingredience:
     def __init__(self, label, unit: Unit) -> None:
@@ -53,11 +55,8 @@ class Ingredience:
         self.receipts.append(receipt)
 
     def print_all_receipts(self):
-        r = f'{self.label} je potreba pro: '
-        for item in self.receipts:
-            r += item.label + ', '
-
-        return r
+        r = ', '.join(it.label for it in self.receipts)
+        return f'{self.label} je potreba pro: {r}'
 
 c_breakfast = Course('snidane')
 c_lunch = Course('obed')
@@ -77,6 +76,7 @@ ryzak = Receipt('nakyp', c_lunch)
 ryzak.add_ing(rice, 0.2)
 ryzak.add_ing(milk, 0.4)
 ryzak.add_ing(butter, 0.04)
+ryzak.add_tag(t_vege)
 
 print(ryzak)
 
