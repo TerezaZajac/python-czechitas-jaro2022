@@ -26,6 +26,9 @@ class Polozka():
     def get_info(self):
         return f'nazev: {self.jmeno}, zanr: {self.zanr}. '
 
+    def get_celkova_delka(self):
+        return 0
+
 class Film(Polozka):
     def __init__(self, jmeno, zanr, delka):
         super().__init__(jmeno, zanr)
@@ -33,22 +36,65 @@ class Film(Polozka):
     
     def get_info(self):
         return super().get_info() + f'Delka filmu je {self.delka} minut.' 
+    
+    def get_celkova_delka(self):
+        return self.delka
 
 class Serial(Polozka):
-    def __init__(self, jmeno, zanr, pocet_epizod, delka_epozido):
+    def __init__(self, jmeno, zanr, pocet_epizod, delka_epozidy):
         super().__init__(jmeno, zanr)
         self.pocet_epizod = pocet_epizod
-        self.delka_epizody = delka_epozido
+        self.delka_epizody = delka_epozidy
     
     def get_info(self):
         return super().get_info() + f'Pocet epizod serialu je {self.pocet_epizod} a delka jedne epizody je {self.delka_epizody} minut.'
+    
+    def get_celkova_delka(self):
+        return self.pocet_epizod * self.delka_epizody
 
+
+class Uzivatel:
+    def __init__(self, uzivatelske_jmeno):
+        self.uzivatelske_jmeno = uzivatelske_jmeno
+        self.delka_sledovani = 0
+        
+    def watch(self, porad: Polozka):
+        self.delka_sledovani += porad.get_celkova_delka()
+        return self.delka_sledovani
+        
+    def get_info(self):
+        return f'Uzivatel {self.uzivatelske_jmeno} stravil sledovanim poradu {self.delka_sledovani} minut.'
 
 
 matrix = Film('Matrix', 'scifi', 131)
+pulp_fiction = Film('Pupl Fiction', 'drama', 154)
+pride_prejudice = Film('Pride & Prejudice', 'romanticky', 127)
 
-tbbt = Serial('The Big Bang Theory', 'sitcom', 24, 20)
+tbbt = Serial('The Big Bang Theory', 'komedie', 24, 20)
+friends = Serial('Pratele', 'komedie', 24, 22)
+bridgerton = Serial('Bridgertonovi', 'romaticky', 8, 60)
+
+
+david = Uzivatel('David Horak')
+marta = Uzivatel('Marta Nova')
+
+david.watch(matrix)
+david.watch(pulp_fiction)
+david.watch(tbbt)
+david.watch(matrix)
+david.watch(friends)
+
+marta.watch(friends)
+marta.watch(pride_prejudice)
+marta.watch(bridgerton)
+marta.watch(pride_prejudice)
+marta.watch(bridgerton)
 
 print(matrix.get_info())
 print(tbbt.get_info())
-
+print(pulp_fiction.get_info())
+print(pride_prejudice.get_info())
+print(friends.get_info())
+print(bridgerton.get_info())
+print(david.get_info())
+print(marta.get_info())
