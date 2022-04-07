@@ -6,7 +6,9 @@
 # Upravte váš program tak, aby jméno souboru k otevření zadal uživatel, abychom mohli takto zpracovávat výkazy z různých souborů, aniž bychom museli upravovat samotný kód programu. Program ověřte tak, že si soubor auta.txt přejmenujete, nebo si vytvořte nový.
 
 
-with open('/Users/user/Desktop/programovani/auta.txt') as vstup:
+filename = input('Zadejte nazev souboru: ')
+
+with open('/Users/user/Desktop/programovani/' + filename) as vstup:
     auta = vstup.readlines()
 auta = [radek.split() for radek in auta]
 
