@@ -18,16 +18,20 @@
 
 # Nejjednodušší řešení je, pokud si u filmu/seriálu uložíš celkovou délku do pomocné proměnné a tuto pomocnou proměnnou potom předáš jako parametr funkci pripocti_zhlednuti.
 
-class Polozka():
+from abc import ABC, abstractmethod
+
+class Polozka(ABC):
     def __init__(self, jmeno, zanr):
         self.jmeno = jmeno
         self.zanr = zanr
     
     def get_info(self):
         return f'nazev: {self.jmeno}, zanr: {self.zanr}. '
-
+    
+    @abstractmethod
     def get_celkova_delka(self):
-        return 0
+        pass
+
 
 class Film(Polozka):
     def __init__(self, jmeno, zanr, delka):
@@ -39,6 +43,7 @@ class Film(Polozka):
     
     def get_celkova_delka(self):
         return self.delka
+        
 
 class Serial(Polozka):
     def __init__(self, jmeno, zanr, pocet_epizod, delka_epozidy):
