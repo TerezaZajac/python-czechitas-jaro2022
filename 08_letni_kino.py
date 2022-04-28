@@ -22,11 +22,12 @@ from datetime import datetime
 visitor_date_str = input('Zadejte datum (ve středoevropském formátu) navstevy kina: ')
 visitor_number = input('Zadejte pocet vstupenek: ')
 
-visitor_date = datetime.strptime(visitor_date_str, "%d. %m. %Y")
+visitor_date_str = visitor_date_str.replace(' ','')
+visitor_date = datetime.strptime(visitor_date_str, "%d.%m.%Y")
 
-if datetime(2021, 7, 1)<visitor_date<datetime(2021, 8, 10):
+if datetime(2021, 7, 1)<=visitor_date<=datetime(2021, 8, 10):
     cena = 250
-elif datetime(2021, 8, 11)<visitor_date<datetime(2021, 8, 31):
+elif datetime(2021, 8, 11)<=visitor_date<=datetime(2021, 8, 31):
     cena = 180
 else:
     cena = 0
