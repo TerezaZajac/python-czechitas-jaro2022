@@ -9,10 +9,8 @@ temperature.info()
 
 # Dále napiš následující dotazy:
 # Dotaz na měření, která byla provedena v Praze. Je na datech něco zvláštního? Napadá tě, čím to může být? Zde je nápověda.
-print(temperature.iloc[2100:2130])
 
-temperature = temperature.set_index('City')
-print(temperature.loc['Prague'])
+print(temperature.loc[temperature["City"] == "Prague"])
 
 # Dotaz na měření, ve kterých je teplota (sloupec AvgTemperature) vyšší než 80 stupňů.
 print(temperature[temperature['AvgTemperature'] > 80])
